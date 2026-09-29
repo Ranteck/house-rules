@@ -18,27 +18,32 @@ every session.
 ## Install
 
 ```bash
-DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
-curl -fsSL https://raw.githubusercontent.com/Ranteck/house-rules/main/HOUSE-RULES.md -o "$DIR/HOUSE-RULES.md"
-grep -qx '@HOUSE-RULES.md' "$DIR/CLAUDE.md" 2>/dev/null || printf '\n@HOUSE-RULES.md\n' >> "$DIR/CLAUDE.md"
+curl -fsSL https://raw.githubusercontent.com/Ranteck/house-rules/main/install.sh | sh
 ```
 
-Start a new Claude Code session afterwards. The last line only adds the
-import if it is missing, so the whole block is safe to run more than once.
+[`install.sh`](install.sh) downloads `HOUSE-RULES.md` into `~/.claude` and adds
+the line `@HOUSE-RULES.md` to your `~/.claude/CLAUDE.md` if it is missing, so
+it is safe to run more than once. Start a new Claude Code session afterwards.
+
+**Several profiles?** The script honors `CLAUDE_CONFIG_DIR`. Run it once per
+profile, setting the variable for `sh`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Ranteck/house-rules/main/install.sh | CLAUDE_CONFIG_DIR=/path/to/profile sh
+```
 
 Or paste this into Claude Code:
 
-> Install house-rules: download
-> <https://raw.githubusercontent.com/Ranteck/house-rules/main/HOUSE-RULES.md>
-> to `~/.claude/HOUSE-RULES.md` and add the line `@HOUSE-RULES.md` to
-> `~/.claude/CLAUDE.md` if it is not already there.
-
-**Several profiles?** If you use `CLAUDE_CONFIG_DIR` for more than one
-profile, run the commands once per profile with that variable set.
+```text
+Install house-rules: download
+https://raw.githubusercontent.com/Ranteck/house-rules/main/HOUSE-RULES.md
+to ~/.claude/HOUSE-RULES.md and add the line @HOUSE-RULES.md to
+~/.claude/CLAUDE.md if it is not already there.
+```
 
 ## Update
 
-Rerun the install commands above.
+Rerun the install command.
 
 ## Uninstall
 
