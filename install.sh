@@ -1,10 +1,10 @@
 #!/bin/sh
 # Installs or updates house-rules for Claude Code. Safe to rerun.
-set -eu
 
 # Everything runs inside main so a download cut short by the network
 # executes nothing instead of half the script.
 main() {
+  set -eu
   dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
   url="https://raw.githubusercontent.com/Ranteck/house-rules/main/HOUSE-RULES.md"
 
@@ -12,6 +12,8 @@ main() {
   # Download next to the target and rename, so a failed update never leaves
   # a truncated rules file loaded in every session.
   curl -fsSL "$url" -o "$dir/HOUSE-RULES.md.tmp"
+  [ "$(head -n 1 "$dir/HOUSE-RULES.md.tmp")" = "# House Rules" ] ||
+    { echo "house-rules: unexpected download; nothing changed." >&2; exit 1; }
   mv "$dir/HOUSE-RULES.md.tmp" "$dir/HOUSE-RULES.md"
 
   # A missing CLAUDE.md is expected on a fresh profile; the import creates it.

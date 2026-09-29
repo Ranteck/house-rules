@@ -35,10 +35,7 @@ curl -fsSL https://raw.githubusercontent.com/Ranteck/house-rules/main/install.sh
 Or paste this into Claude Code:
 
 ```text
-Install house-rules: download
-https://raw.githubusercontent.com/Ranteck/house-rules/main/HOUSE-RULES.md
-to ~/.claude/HOUSE-RULES.md and add the line @HOUSE-RULES.md to
-~/.claude/CLAUDE.md if it is not already there.
+Install house-rules by running: curl -fsSL https://raw.githubusercontent.com/Ranteck/house-rules/main/install.sh | sh
 ```
 
 ## Update

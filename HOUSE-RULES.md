@@ -20,7 +20,7 @@ convention, the repo wins.
 ## 2. Scope
 
 2.1 Change only what was asked (including its tests). If you see another problem, point it
-    out; don't fix it without approval.
+    out and propose a fix separately; don't fix it without approval.
 
 2.2 Don't generalize for hypothetical cases. Abstract when there is a genuinely shared rule
     or piece of knowledge, not because two blocks of code look alike.
@@ -42,7 +42,7 @@ convention, the repo wins.
 
 3.4 Either resolve an error or propagate it with its cause, adding context (what was being
     attempted) without secrets or personal data. Cleaning up resources or adding context
-    is not resolving it. Log the failure once, where it is resolved.
+    is not resolving it. Log the failure once, where it is recovered or finally reported.
     Why: logging and rethrowing at every layer makes the same error show up several times
     in the logs.
 
@@ -55,10 +55,11 @@ convention, the repo wins.
 4.2 Log structured events with chosen fields, not whole requests or objects. Never log
     secrets or personal data, even if a skill shows them in an example.
 
-4.3 Levels: error (an operation failed and was not recovered; someone may need to act),
-    warn (degraded but handled), info (significant business event) and debug (diagnostic
-    detail, off by default in production). In services, one wide event per request per
-    service; extra events only when needed for diagnosis or audit.
+4.3 Levels: error (the requested operation failed and was not recovered; someone may need
+    to act), warn (degraded but recovered), info (significant business event) and debug
+    (diagnostic detail, off by default in production). Expected rejections are not errors.
+    In services, one wide event per request per service; extra events only when needed
+    for diagnosis or audit.
     If an installed skill says otherwise on levels or granularity, these rules win.
 
 ## 5. Configuration and secrets
