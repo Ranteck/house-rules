@@ -1,4 +1,4 @@
-# house-rules
+# House-Rules
 
 **House rules for AI coding agents. Stop the vibe-coding mess.**
 
@@ -29,7 +29,7 @@ more than once: it only adds the import if it is missing.
 Or paste this into Claude Code:
 
 > Install house-rules: download
-> https://raw.githubusercontent.com/Ranteck/house-rules/main/HOUSE-RULES.md
+> <https://raw.githubusercontent.com/Ranteck/house-rules/main/HOUSE-RULES.md>
 > to `~/.claude/HOUSE-RULES.md` and add the line `@HOUSE-RULES.md` to
 > `~/.claude/CLAUDE.md` if it is not already there.
 
@@ -66,14 +66,14 @@ detail when a task needs it.
 ### Process and security (official marketplace)
 
 | Plugin | What it adds | Install |
-|---|---|---|
+| --- | --- | --- |
 | superpowers | Working process: TDD, systematic debugging, verify before claiming done, code review | `/plugin install superpowers@claude-plugins-official` |
 | security-guidance | Security review of Claude-written code: pattern warnings on edits, diff review on Stop, commit reviewer (injection, XSS, SSRF, hardcoded secrets…) | `/plugin install security-guidance@claude-plugins-official` |
 
 ### Skills
 
 | Skill | What it adds | Install |
-|---|---|---|
+| --- | --- | --- |
 | pragmatic-programmer | Design principles: DRY as knowledge, orthogonality, design by contract | `npx skills add wondelai/skills@pragmatic-programmer -g` |
 | logging-best-practices | Wide events / canonical log lines | `npx skills add boristane/agent-skills@logging-best-practices -g` |
 | observability-and-instrumentation | Log levels, correlation IDs, metrics, tracing, alerting | `npx skills add addyosmani/agent-skills@observability-and-instrumentation -g` |
@@ -88,7 +88,7 @@ Add the marketplace once:
 ```
 
 | Plugin | What it adds | Install |
-|---|---|---|
+| --- | --- | --- |
 | insecure-defaults | Detects hardcoded credentials, fallback secrets, weak auth defaults, dangerous production values | `/plugin install insecure-defaults@trailofbits` |
 | supply-chain-risk-auditor | Audits npm, PyPI and Go dependencies: advisories, abandoned upstreams, install scripts | `/plugin install supply-chain-risk-auditor@trailofbits` |
 | property-based-testing | Write, review and triage property-based tests (Hypothesis, fast-check, proptest…) | `/plugin install property-based-testing@trailofbits` |
