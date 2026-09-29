@@ -55,10 +55,10 @@ convention, the repo wins.
 4.2 Log structured events with chosen fields, not whole requests or objects. Never log
     secrets or personal data, even if a skill shows them in an example.
 
-4.3 Levels: error (an invariant broke; someone may need to act), warn (degraded but
-    handled), info (significant business event) and debug (diagnostic detail, off by
-    default in production). In services, one wide event per request per service; extra
-    events only when needed for diagnosis or audit.
+4.3 Levels: error (an operation failed and was not recovered; someone may need to act),
+    warn (degraded but handled), info (significant business event) and debug (diagnostic
+    detail, off by default in production). In services, one wide event per request per
+    service; extra events only when needed for diagnosis or audit.
     If an installed skill says otherwise on levels or granularity, these rules win.
 
 ## 5. Configuration and secrets
