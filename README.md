@@ -23,8 +23,8 @@ curl -fsSL https://raw.githubusercontent.com/Ranteck/house-rules/main/HOUSE-RULE
 grep -qx '@HOUSE-RULES.md' "$DIR/CLAUDE.md" 2>/dev/null || printf '\n@HOUSE-RULES.md\n' >> "$DIR/CLAUDE.md"
 ```
 
-Start a new Claude Code session afterwards. The second line is safe to run
-more than once: it only adds the import if it is missing.
+Start a new Claude Code session afterwards. The last line only adds the
+import if it is missing, so the whole block is safe to run more than once.
 
 Or paste this into Claude Code:
 
@@ -38,7 +38,7 @@ profile, run the commands once per profile with that variable set.
 
 ## Update
 
-Rerun the `curl` line.
+Rerun the install commands above.
 
 ## Uninstall
 
@@ -94,10 +94,9 @@ Add the marketplace once:
 | property-based-testing | Write, review and triage property-based tests (Hypothesis, fast-check, proptest…) | `/plugin install property-based-testing@trailofbits` |
 | mutation-testing | Mutation testing campaigns and analysis of surviving mutants | `/plugin install mutation-testing@trailofbits` |
 
-Where these disagree with house-rules, house-rules wins by design. For
-example, `logging-best-practices` allows only `info` and `error` and logs
-`user.email` in one of its "correct" examples; rules 4.2 and 4.3 override
-both.
+On logging, house-rules wins where these disagree: `logging-best-practices`
+allows only `info` and `error` and logs `user.email` in one of its "correct"
+examples; rules 4.2 and 4.3 say so explicitly and override both.
 
 ## License
 
