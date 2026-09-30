@@ -43,7 +43,7 @@ Scope: fix install.sh's handling of existing targets and correct README.md claim
    - if it resolves to a readable regular file: do not download and do not replace it; print a notice that the symlink was left as is and that its target must be updated instead; continue to the existing import step so `@HOUSE-RULES.md` is still ensured in `CLAUDE.md`.
    - otherwise (dangling, or resolving to a directory or other non-regular file): print an error to stderr and exit 1 before touching `CLAUDE.md`.
 2. If `$dir/HOUSE-RULES.md` is a directory that is not a symlink: print an error to stderr and exit 1 before downloading.
-3. After the download starts, any failure (curl error or the existing first-line check) must leave no `HOUSE-RULES.md.tmp` behind and must not change `HOUSE-RULES.md` or `CLAUDE.md`.
+3. Immediately before the download, remove any existing `$dir/HOUSE-RULES.md.tmp` with `rm -f` (a stale regular file or symlink from an earlier run must never be written through). After the download starts, any failure (curl error or the existing first-line check) must leave no `HOUSE-RULES.md.tmp` behind and must not change `HOUSE-RULES.md` or `CLAUDE.md`.
 4. Write the checks so they behave correctly under `set -e` (use if/then, not bare tests that abort the script).
 5. Out of scope, unchanged: the download URL, the first-line validation, the import line format, and the final success message for the normal path.
 
@@ -78,3 +78,12 @@ Scope: fix install.sh's handling of existing targets and correct README.md claim
 - **Resulting writer work**: install.sh: symlink and directory guards before download, .tmp cleanup on failure; README.md: B1-B5; docs/design.md: status line only (ignored by git, so not part of this commit)
 - **Checkpoint**: locate-by-feature-and-round
 - **Decision notes**: contract derived from the 2026-09-30 review-only pass and the user-approved plan; docs/design.md verified against a pre-cycle copy kept outside the repository
+
+##### REFACTOR-r01
+
+- **Actors/backend**: reviewer Codex (fresh read-only CRITIQUE); writer Codex; orchestrator Claude; backend codex
+- **CRITIQUE outcome**: 3 P2 findings on install.sh failure paths; README B1-B5 and docs/design.md judged in scope
+- **DEBATE classifications**: valid (downgraded to P3): stale HOUSE-RULES.md.tmp symlink written through by curl -o; false positive: no cleanup on SIGTERM or failed mv (outside A3, only a stray never-loaded file, removed by the accepted fix on the next run); false positive: destination changed by another process mid-install (requires concurrent mutation of the user's own config dir; no portable POSIX atomic alternative)
+- **Resulting writer work**: install.sh: `rm -f "$dir/HOUSE-RULES.md.tmp"` before the download; contract A3 updated to require it
+- **Checkpoint**: locate-by-feature-and-round
+- **Decision notes**: the resumed `--resume-last --write` attempt was rejected by the read-only sandbox; snapshots proved no partial write, so a fresh write session was used with an inline continuity summary

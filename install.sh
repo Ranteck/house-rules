@@ -22,6 +22,7 @@ main() {
   else
     # Download next to the target and rename, so a failed update never leaves
     # a truncated rules file loaded in every session.
+    rm -f "$dir/HOUSE-RULES.md.tmp"
     if ! curl -fsSL "$url" -o "$dir/HOUSE-RULES.md.tmp"; then
       rm -f "$dir/HOUSE-RULES.md.tmp"
       exit 1
