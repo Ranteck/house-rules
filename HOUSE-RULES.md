@@ -29,10 +29,13 @@ convention, the repo wins.
 
 ## 3. Errors
 
-3.1 Validate external data at every boundary (user input, APIs, files, environment
-    variables) and fail early. Inside, trust validated values; revalidate only on a
-    concrete risk of bypass or of the data changing. Permission and invariant checks
-    always stay.
+3.1 Parse and validate external data where it enters the program (user input, APIs,
+    files, environment variables) and fail early. Turn it into typed values (a schema
+    or DTO; a plain check is enough for a single scalar), reject or discard fields the
+    contract doesn't allow, and pass only those values inward, never the raw data.
+    Inside, trust validated values; revalidate only on a concrete risk of bypass or of
+    the data changing. Permission and invariant checks always stay.
+    Why: a type annotation is not a runtime check.
 
 3.2 Translate errors into user-facing messages in one place (entrypoint, handler, main),
     without exposing internal details.
@@ -45,6 +48,12 @@ convention, the repo wins.
     is not resolving it. Log the failure once, where it is recovered or finally reported.
     Why: logging and rethrowing at every layer makes the same error show up several times
     in the logs.
+
+3.5 Build outgoing data (API responses, requests to third parties, exported files,
+    messages) to satisfy its contract, with allowed fields selected explicitly, also
+    inside nested objects and collections. Use dedicated objects or serializers that
+    enforce that selection; never serialize internal objects whole.
+    Why: a field added to an internal object later must not leak out by default.
 
 ## 4. Logs
 
