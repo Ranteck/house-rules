@@ -88,7 +88,12 @@ convention, the repo wins.
     If the test is wrong or became outdated because of a requested change, explain why
     before changing it.
 
-## 7. Comments
+## 7. Comments and prose
 
 7.1 A comment explains why, not what. If you need to explain what the code does, improve
     the names.
+
+7.2 In docs, skills, prompts and PR descriptions, say each thing once, unless a
+    section must work on its own, and leave out what the intended reader
+    already knows.
+    Why: repeated or obvious lines cost reading time and context, and copies drift apart.
