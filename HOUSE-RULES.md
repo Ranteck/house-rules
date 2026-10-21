@@ -97,3 +97,16 @@ convention, the repo wins.
     section must work on its own, and leave out what the intended reader
     already knows.
     Why: repeated or obvious lines cost reading time and context, and copies drift apart.
+
+## 8. Delegation
+
+8.1 When you orchestrate and other agents are available as workers, hand them
+    implementation, fixes, parallel reviews and long tasks; you write the task and do
+    the final review. If parallel workers depend on each other's output, fix that
+    interface in both tasks. A worker does its task itself and doesn't delegate it
+    again.
+    Why: the orchestrator's tokens are the scarcest.
+
+8.2 Before integrating a worker's result, read the full diff, run the checks yourself
+    and verify every source it cites.
+    Why: workers report green tests on wrong code, and some invent sources.
