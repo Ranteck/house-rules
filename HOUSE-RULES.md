@@ -65,11 +65,16 @@ convention, the repo wins.
     secrets or personal data, even if a skill shows them in an example.
 
 4.3 Levels: error (the requested operation failed and was not recovered; someone may need
-    to act), warn (degraded but recovered), info (significant business event) and debug
-    (diagnostic detail, off by default in production). Expected rejections are not errors.
-    In services, one wide event per request per service; extra events only when needed
-    for diagnosis or audit.
+    to act), warn (degraded but recovered), info (normal outcome or significant business
+    event) and debug (diagnostic detail, off by default in production). Expected
+    rejections are not errors. One wide event per unit of work (request, job, CLI
+    command, message); extra events only when needed for diagnosis or audit.
     If an installed skill says otherwise on levels or granularity, these rules win.
+
+4.4 When you add or change code, add its logging in the same change, success paths
+    included, and check the event in real output or a test. Libraries and pure functions
+    add context to the caller's event instead of logging.
+    Why: logging left for later never gets added.
 
 ## 5. Configuration and secrets
 
