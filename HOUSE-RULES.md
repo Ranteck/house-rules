@@ -115,3 +115,16 @@ convention, the repo wins.
 8.2 Before integrating a worker's result, read the full diff, run the checks yourself
     and verify every source it cites.
     Why: workers report green tests on wrong code, and some invent sources.
+
+## 9. Agreed constraints and handoffs
+
+9.1 Record a constraint as soon as the user agrees to it, in the place that matches its
+    scope: the feature's spec or intent, the project's instructions file, the user's
+    global instructions file (for how they work) or, otherwise, your memory.
+    Ask before editing an instructions file or an approved spec or intent.
+    Why: compaction drops constraints that exist only in the conversation.
+
+9.2 When a handoff restates the request in another agent's words and cites no source the
+    user wrote or approved, confirm your reading with the user before planning or
+    delegating.
+    Why: each restatement can drop or change the request.
