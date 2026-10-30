@@ -124,7 +124,7 @@ convention, the repo wins.
     Ask before editing an instructions file or an approved spec or intent.
     Why: compaction drops constraints that exist only in the conversation.
 
-9.2 When a handoff restates the request in another agent's words and cites no source the
-    user wrote or approved, confirm your reading with the user before planning or
-    delegating.
+9.2 When a handoff makes you responsible for the user's overall request and restates it in
+    another agent's words without citing a source the user wrote or approved, confirm your
+    reading with the user before planning or delegating.
     Why: each restatement can drop or change the request.
