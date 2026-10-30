@@ -34,7 +34,8 @@ main() {
 
   # A missing CLAUDE.md is expected on a fresh profile; the import creates it.
   # The leading newline keeps the import off a last line that lacks one.
-  grep -qx '@HOUSE-RULES.md' "$dir/CLAUDE.md" 2>/dev/null ||
+  # Any path form counts: a symlinked CLAUDE.md needs an absolute import such as @~/.claude/HOUSE-RULES.md.
+  grep -qxE '@(.*/)?HOUSE-RULES\.md' "$dir/CLAUDE.md" 2>/dev/null ||
     printf '\n@HOUSE-RULES.md\n' >> "$dir/CLAUDE.md"
 
   echo "house-rules installed in $dir. Start a new Claude Code session."

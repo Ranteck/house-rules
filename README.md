@@ -22,8 +22,8 @@ curl -fsSL https://raw.githubusercontent.com/Ranteck/house-rules/main/install.sh
 ```
 
 [`install.sh`](install.sh) downloads `HOUSE-RULES.md` into `~/.claude` and adds
-the line `@HOUSE-RULES.md` to your `~/.claude/CLAUDE.md` if it is missing, so
-it is safe to run more than once. Rerunning replaces installer-managed copies;
+`@HOUSE-RULES.md` to your `~/.claude/CLAUDE.md` unless it already imports
+`HOUSE-RULES.md`, with or without a path, so it is safe to run more than once. Rerunning replaces installer-managed copies;
 an existing `HOUSE-RULES.md` symlink is preserved, and its target must be
 updated separately. Start a new Claude Code session afterwards.
 
@@ -49,7 +49,7 @@ Rerun the install command to replace installer-managed copies. An existing
 
 ```bash
 DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
-sed -i.bak '/^@HOUSE-RULES\.md$/d' "$DIR/CLAUDE.md" && rm "$DIR/HOUSE-RULES.md"
+sed -E -i.bak '/^@(.*\/)?HOUSE-RULES\.md$/d' "$DIR/CLAUDE.md" && rm "$DIR/HOUSE-RULES.md"
 ```
 
 This leaves a `CLAUDE.md.bak` backup next to your `CLAUDE.md`.
