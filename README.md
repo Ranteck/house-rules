@@ -57,11 +57,11 @@ This leaves a `CLAUDE.md.bak` backup next to your `CLAUDE.md`.
 If `CLAUDE.md` is a symlink, remove the import line in the file it points to
 instead: `sed -i` replaces the link with a regular file.
 
-## Codex
+## Codex and Antigravity
 
-Codex does not expand `@` imports. Copy the contents of `HOUSE-RULES.md`
-into `~/.codex/AGENTS.md` inside a marked block, keeping the file's existing
-content:
+Codex and Antigravity do not expand `@` imports. They read a copy of
+`HOUSE-RULES.md` inside a marked block in `~/.codex/AGENTS.md` and
+`~/.gemini/GEMINI.md`, next to each file's own content:
 
 ```markdown
 <!-- house-rules:start -->
@@ -69,8 +69,9 @@ Paste the contents of HOUSE-RULES.md here.
 <!-- house-rules:end -->
 ```
 
-Replace that block manually on every update. The installer does not manage
-Codex.
+The installer does not manage these files.
+[agent-sync](https://github.com/Ranteck/agent-sync) keeps both blocks in sync;
+without it, replace them by hand on every update.
 
 ## Your own rules
 
