@@ -93,6 +93,12 @@ convention, the repo wins.
     If the test is wrong or became outdated because of a requested change, explain why
     before changing it.
 
+6.3 For a bug fix, first write a test that reproduces the bug and watch it fail because of
+    the bug; then fix the code without editing that test. If no test can reproduce it,
+    explain why and show how you verified the fix.
+    Why: a test that reproduced the bug before the fix, and passes unchanged afterwards,
+    proves the bug is gone.
+
 ## 7. Comments and prose
 
 7.1 A comment explains why, not what. If you need to explain what the code does, improve
