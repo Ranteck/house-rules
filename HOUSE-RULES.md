@@ -57,24 +57,36 @@ convention, the repo wins.
 
 ## 4. Logs
 
-4.1 Configure logging in one place (child loggers, e.g. per request, are fine); no stray
+4.1 Configure logging in one place and emit repeated events (per request, external call,
+    stage, final error) from shared code such as middleware or a client wrapper; it adds
+    the unit of work's id to every event, the final error included. No stray
     print/console calls for diagnostics. In a CLI, results go to stdout; logs, errors and
     progress go to stderr.
 
-4.2 Log structured events with chosen fields, not whole requests or objects. Never log
-    secrets or personal data, even if a skill shows them in an example.
+4.2 Log structured events with chosen fields, not whole requests or objects, stating what
+    the code did, not what it assumes. Never log secrets or personal data.
 
 4.3 Levels: error (the requested operation failed and was not recovered; someone may need
     to act), warn (degraded but recovered), info (normal outcome or significant business
     event) and debug (diagnostic detail, off by default in production). Expected
     rejections are not errors. One wide event per unit of work (request, job, CLI
-    command, message); extra events only when needed for diagnosis or audit.
-    If an installed skill says otherwise on levels or granularity, these rules win.
+    command, message); a long one also logs each stage it completes at info. Other
+    events only for diagnosis or audit.
 
-4.4 When you add or change code, add its logging in the same change, success paths
-    included, and check the event in real output or a test. Libraries and pure functions
-    add context to the caller's event instead of logging.
+4.4 When you add or change code, use any logging and observability skills (these rules win
+    where they disagree) and add its logging in the same change, success paths included.
+    Check each event as its reader gets it, and that nothing expected shows up there as
+    an error: in a test that reads the logger's output and, once deployed, where logs are
+    read. Libraries and pure functions add context to the caller's event instead of
+    logging.
     Why: logging left for later never gets added.
+
+4.5 The error event locates the failure without rerunning in debug: the operation that
+    failed (step, external call or command, not a function name), a code that tells apart
+    causes needing different fixes, the third party's request id if it returns one and,
+    for invalid data, the paths and codes of the failing fields, not their values or
+    messages. The 4.1 wrapper running the operation attaches these fields to the error,
+    and the 3.5 allowlist lets them through.
 
 ## 5. Configuration and secrets
 

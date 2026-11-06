@@ -135,7 +135,7 @@ and available on `PATH`.
 
 On logging, house-rules wins where these disagree: `logging-best-practices`
 allows only `info` and `error` and logs `user.email` in one of its "correct"
-examples; rules 4.2 and 4.3 say so explicitly and override both.
+examples; 4.2 and 4.3 override both, as 4.4 states.
 
 ## License
 
